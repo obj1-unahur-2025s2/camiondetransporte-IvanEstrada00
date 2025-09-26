@@ -1,3 +1,7 @@
 object cosas {
     
+
+    method peso() {
+      
+    }
 }

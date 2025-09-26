@@ -1,3 +1,4 @@
+import wollok.vm.*
 object cosas {
     
 
@@ -52,5 +53,42 @@ object antiaerea {
   
 }
 object contenendor {
-  var carga = []
+    const pesoContenedor = 100 
+    var carga = []
+
+    method aumentarCarga(cosa) {
+        carga.add(cosa)      
+    }
+
+    method peso() {
+      return pesoContenedor + carga.sum({c=>c.peso()}) 
+    }
+    method peligrosidad() {
+      if(!carga.isEmpty()){return carga.max({c=>c.peso()})}
+      else{return 0}
+    }
+
+}
+object residuos {
+    var peso = 0
+    method nuevoPeso(nuevoValor){
+    peso = nuevoValor
+    } 
+    method peso() = peso
+    method peligrosidad() = 200
+}
+object embalaje {
+    
+  var cosaEmbalada = null
+  method nuevaCosaEmbalada(cosa) {
+    cosaEmbalada = cosa
+  }
+  method peso() {
+    if(cosaEmbalada == null) {return 0} 
+    else {return cosaEmbalada.peso()}
+  }
+  method peligrosidad() {
+    if(cosaEmbalada == null) {return 0} 
+    else {return cosaEmbalada.peligrosidad()/2}
+  }
 }

@@ -13,15 +13,25 @@ object camion {
     }
 
     method primeraCosaConNivelDePeligro(valor) {
-      return cargaTotal.find({c => c.peligro() == valor})
+        return  cargaTotal.findOrDefault({c => c.peligrosidad() == valor},null)
+      /*if( cargaTotal.any({c => c.peligrosidad() == valor}))
+      {
+        return  cargaTotal.find({c => c.peligrosidad() == valor})
+      }
+      else 
+      {return }
+      */
+    }
+    method cosaEntreValores(valorMin,valorMax) {
+      return cargaTotal.any({c=> c.peso()>valorMin && c.peso()<valorMax  })
     }
 
     method todasCosasConNivelDePeligroMayor(valor) {
-      return cargaTotal.filter({c => c.peligro() > valor})
+      return cargaTotal.filter({c => c.peligrosidad() > valor})
     }
 
     method todasCosasConNivelDePeligroMayorAPeligroDeCosa(cosa) {
-      return cargaTotal.filter({c => c.peligro() > cosa.peligro()})
+      return cargaTotal.filter({c => c.peligrosidad() > cosa.peligrosidad()})
     }
 
     method pesoTotalCarga() {

@@ -1,3 +1,4 @@
+import camion.*
 import cosas.*
 
 describe "group of test for cosas" {
@@ -5,5 +6,19 @@ describe "group of test for cosas" {
   test "first test" {
     assert.that(true)
   }
-
+  test "embalaje carga 30kg de residuos" {
+    residuos.nuevoPeso(30)
+    embalaje.nuevaCosaEmbalada(residuos)
+    assert.that(embalaje.peso() == 30)
+  }
+  test "100 ladrillos" {
+    ladrillos.nuevaCantidadLadrillos(100)
+    camion.aumentarCarga(ladrillos)
+    assert.that(camion.pesoTotalCarga()==200)
+  }
+  test "contenedor con rider y bumblebee" {
+    contenendor.aumentarCarga(rider)
+    contenendor.aumentarCarga(bumblebee)
+    assert.that(contenendor.peso() ==1400)
+  }
 }

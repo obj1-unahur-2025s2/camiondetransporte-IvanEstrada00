@@ -33,6 +33,10 @@ object camion {
     method todasCosasConNivelDePeligroMayorAPeligroDeCosa(cosa) {
       return cargaTotal.filter({c => c.peligrosidad() > cosa.peligrosidad()})
     }
+    method cosaMasPesadaDelCamion() {
+      if(!cargaTotal.isEmpty()){return cargaTotal.max({c=>c.peso()})}
+      else{return 0}
+    }
 
     method pesoTotalCarga() {
       return cargaTotal.sum({c => c.peso()}) 
